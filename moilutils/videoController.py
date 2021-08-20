@@ -53,7 +53,10 @@ class VideoController(object):
         sec_pos %= 60
         self.sec = sec_pos
         self.controller()
-        self.parent.showToWindow()
+        self.parent.show_to_window()
+        if self.parent.video_writer is not None:
+            image = self.parent.image if self.parent.normal_view else self.parent.result_image
+            self.parent.video_writer.write(image)
 
     def reset_time(self):
         """

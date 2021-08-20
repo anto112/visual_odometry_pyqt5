@@ -9,8 +9,8 @@ sudo apt install python3-dev
 sudo apt-get install qttools5-dev-tools
 sudo apt-get install qttools5-dev
 echo -e "1. Create Virtual environment"
-python3 -m venv ../venv
-source ../venv/bin/activate
+python3 -m venv venv
+source ./venv/bin/activate
 pip install pip --upgrade
 echo -e "2. Install the requirements library"
 pip install Pillow==8.1.0 \

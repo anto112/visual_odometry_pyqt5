@@ -4,7 +4,7 @@ from moilutils import MoilUtils
 import cv2
 import numpy as np
 from mouseController import MouseEvent
-from videoController import VideoController
+from moilutils import VideoController
 
 
 class Controller(Ui_MainWindow):
@@ -25,6 +25,7 @@ class Controller(Ui_MainWindow):
         self.image = None
         self.cam = None
         self.cap = None
+        self.video_writer = None
         self.windowActivated = None
         self.winResultActive = None
 
@@ -159,7 +160,7 @@ class Controller(Ui_MainWindow):
             self.parent.setWindowTitle(self.title + " - " + filename)
             self.cam = None
             self.odometry = False
-            self.showToWindow()
+            self.show_to_window()
 
     def load_video(self):
         """
@@ -230,95 +231,95 @@ class Controller(Ui_MainWindow):
         zoom = self.zoomSingle.value()
         moil = MoilUtils.connectToMoildev(self.typeCamera)
         self.mapsX_single, self.mapsY_single = moil.getAnypointMaps(alpha, beta, zoom, 2)
-        self.showToWindow()
+        self.show_to_window()
 
     def setParamWindow1(self):
         alpha = self.alpha6view_window1.value()
         beta = self.beta6view_window1.value()
         zoom = self.zoom6view_window1.value()
         self.mapsX[0], self.mapsY[0] = self.moildev[0].getAnypointMaps(alpha, beta, zoom, 2)
-        self.showToWindow()
+        self.show_to_window()
 
     def setParamWindow2(self):
         alpha = self.alpha6view_window2.value()
         beta = self.beta6view_window2.value()
         zoom = self.zoom6view_window2.value()
         self.mapsX[1], self.mapsY[1] = self.moildev[1].getAnypointMaps(alpha, beta, zoom, 2)
-        self.showToWindow()
+        self.show_to_window()
 
     def setParamWindow3(self):
         alpha = self.alpha6view_window3.value()
         beta = self.beta6view_window3.value()
         zoom = self.zoom6view_window3.value()
         self.mapsX[2], self.mapsY[2] = self.moildev[2].getAnypointMaps(alpha, beta, zoom, 2)
-        self.showToWindow()
+        self.show_to_window()
 
     def setParamWindow4(self):
         alpha = self.alpha6view_window4.value()
         beta = self.beta6view_window4.value()
         zoom = self.zoom6view_window4.value()
         self.mapsX[3], self.mapsY[3] = self.moildev[3].getAnypointMaps(alpha, beta, zoom, 2)
-        self.showToWindow()
+        self.show_to_window()
 
     def setParamWindow5(self):
         alpha = self.alpha6view_window5.value()
         beta = self.beta6view_window5.value()
         zoom = self.zoom6view_window5.value()
         self.mapsX[4], self.mapsY[4] = self.moildev[4].getAnypointMaps(alpha, beta, zoom, 2)
-        self.showToWindow()
+        self.show_to_window()
 
     def setParamWindow6(self):
         alpha = self.alpha6view_window6.value()
         beta = self.beta6view_window6.value()
         zoom = self.zoom6view_window6.value()
         self.mapsX[5], self.mapsY[5] = self.moildev[5].getAnypointMaps(alpha, beta, zoom, 2)
-        self.showToWindow()
+        self.show_to_window()
 
     def onclickWindow1(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             self.winResultActive = None
             self.windowActivated = 1
-            self.showToWindow()
+            self.show_to_window()
 
     def onclickWindow2(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             self.winResultActive = None
             self.windowActivated = 2
-            self.showToWindow()
+            self.show_to_window()
 
     def onclickWindow3(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             self.winResultActive = None
             self.windowActivated = 3
-            self.showToWindow()
+            self.show_to_window()
 
     def onclickWindow4(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             self.winResultActive = None
             self.windowActivated = 4
-            self.showToWindow()
+            self.show_to_window()
 
     def onclickWindow5(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             self.winResultActive = None
             self.windowActivated = 5
-            self.showToWindow()
+            self.show_to_window()
 
     def onclickWindow6(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             self.winResultActive = None
             self.windowActivated = 6
-            self.showToWindow()
+            self.show_to_window()
 
     def onclickWindowOriginal(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             self.winResultActive = 1
-            self.showToWindow()
+            self.show_to_window()
 
     def onclickWindowSlam(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             self.winResultActive = 2
-            self.showToWindow()
+            self.show_to_window()
 
     # ++++++++++++ control View Multiple Window +++++++++++
     def onclickTreeView(self):
@@ -371,7 +372,7 @@ class Controller(Ui_MainWindow):
             self.frameWin4.show()
             self.frameWin5.show()
             self.frameWin6.show()
-        self.showToWindow()
+        self.show_to_window()
 
     def onclickShowOriginal(self):
         if self.image is not None:
@@ -404,10 +405,10 @@ class Controller(Ui_MainWindow):
 
     def onclickBack(self):
         self.winResultActive = None
-        self.showToWindow()
+        self.show_to_window()
 
     # showing result image on user interface
-    def showToWindow(self):
+    def show_to_window(self):
         global imgOri, imgSlam, image
         size = self.sizeResultImage()
         self.controlVideoButton()

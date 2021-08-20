@@ -44,8 +44,6 @@ class MoilUtils(object):
         mapsY = []
         for i in range(numberOfView):
             moildev.append(cls.connectToMoildev(typeCamera))
-
-        for i in range(numberOfView):
             mapx, mapy = moildev[i].getAnypointMaps(listAlpha[i],
                                                     listBeta[i],
                                                     listZoom[i],
